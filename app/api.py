@@ -13,9 +13,7 @@ from webdriver_manager.chrome import ChromeDriverManager
 
 from fastapi import Body, FastAPI, HTTPException
 from pydantic import BaseModel
-from decouple import config
 
-JWT_SECRET = config("JWT_SECRET")
 app = FastAPI()
 
 driver_option = webdriver.ChromeOptions()
@@ -63,13 +61,14 @@ def extractProducts(requestUrl : RequestUrl):
         item_quantidade = item_element.td.find_all('span')[2].text
         item_unidade = item_element.td.find_all('span')[3].text
         item_precounidade = item_element.td.find_all('span')[4].text
-        # item_precototal_item = item_element.find_all('td')[1].span.text
 
         product_dict = {
+            'produto_id': i,
             'produto_nome': item_nome,
             'produto_unidade': item_unidade[5:],
             'produto_quantidade': item_quantidade[6:],
-            'produto_precounidade': get_number(item_precounidade)[2:]
+            'produto_precounidade': get_number(item_precounidade)[2:],
+            'produto_selecionado': False
         }
         produtos_comprados_dict['produtos_comprados'].append(product_dict)
 
