@@ -68,7 +68,8 @@ def extractProducts(requestUrl : RequestUrl):
             'produto_unidade': item_unidade[5:],
             'produto_quantidade': item_quantidade[6:],
             'produto_precounidade': get_number(item_precounidade)[2:],
-            'produto_selecionado': False
+            'produto_selecionado': False,
+            'produto_disponivel': True
         }
         produtos_comprados_dict['produtos_comprados'].append(product_dict)
 
