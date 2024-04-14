@@ -66,14 +66,15 @@ def extractProducts(requestUrl : RequestUrl):
             'produto_id': i,
             'produto_nome': item_nome,
             'produto_unidade': item_unidade[5:],
-            'produto_quantidade': item_quantidade[6:],
-            'produto_precounidade': get_number(item_precounidade)[2:],
+            'produto_quantidade': float(item_quantidade[6:].replace(",", ".")),
+            'produto_precounidade': float(get_number(item_precounidade)[2:].replace(",", ".")),
             'produto_selecionado': False,
             'produto_disponivel': True
         }
         produtos_comprados_dict['produtos_comprados'].append(product_dict)
 
     total_pagar = soup2.find_all('div')[2].span.text
-    produtos_comprados_dict['produtos_precototal'] = total_pagar
+    produtos_comprados_dict['produtos_precototal'] = float(total_pagar.replace(',','.'))
+    print(produtos_comprados_dict)
 
     return produtos_comprados_dict
