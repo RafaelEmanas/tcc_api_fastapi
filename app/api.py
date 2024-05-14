@@ -75,6 +75,5 @@ def extractProducts(requestUrl : RequestUrl):
 
     total_pagar = soup2.find_all('div')[2].span.text
     produtos_comprados_dict['produtos_precototal'] = float(total_pagar.replace(',','.'))
-    print(produtos_comprados_dict)
 
     return produtos_comprados_dict
