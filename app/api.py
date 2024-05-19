@@ -1,6 +1,3 @@
-import time
-import requests
-import pandas as pd
 from bs4 import BeautifulSoup
 
 from selenium import webdriver
@@ -11,12 +8,13 @@ from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.chrome.service import Service
 from webdriver_manager.chrome import ChromeDriverManager
 
-from fastapi import Body, FastAPI, HTTPException
+from fastapi import FastAPI
 from pydantic import BaseModel
 
 app = FastAPI()
 
 driver_option = webdriver.ChromeOptions()
+driver_option.add_argument("--headless")
 driver_service = Service(ChromeDriverManager().install())
 
 class RequestUrl(BaseModel):
